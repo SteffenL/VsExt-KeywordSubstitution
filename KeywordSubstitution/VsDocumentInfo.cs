@@ -49,7 +49,7 @@ namespace KeywordSubstitution
                     out pbstrMkDocument,
                     out ppHier,
                     out pitemid,
-                    out ppunkDocData) != VSConstants.S_OK);
+                    out ppunkDocData) == VSConstants.S_OK);
             }
         }
 
