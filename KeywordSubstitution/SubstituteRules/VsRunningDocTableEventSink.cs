@@ -15,6 +15,7 @@ using System.Diagnostics;
 using EnvDTE;
 using EnvDTE80;
 using System.IO;
+using System.Collections.Generic;
 
 namespace KeywordSubstitution.SubstituteRules
 {
@@ -25,6 +26,8 @@ namespace KeywordSubstitution.SubstituteRules
         private IServiceProvider _services;
         /// <summary>   Manager for substitute rules. </summary>
         private SubstituteRules.SubstituteRuleManager _substituteRuleManager = new SubstituteRules.SubstituteRuleManager();
+        /// <summary>   Dirty documents (docCookie). </summary>
+        private HashSet<uint> _dirtyDocuments = new HashSet<uint>();
 
         ////////////////////////////////////////////////////////////////////////////////////////////////////
         /// <summary>   Constructor. </summary>
@@ -46,6 +49,15 @@ namespace KeywordSubstitution.SubstituteRules
 
         public int OnAfterAttributeChangeEx(uint docCookie, uint grfAttribs, IVsHierarchy pHierOld, uint itemidOld, string pszMkDocumentOld, IVsHierarchy pHierNew, uint itemidNew, string pszMkDocumentNew)
         {
+            if ((grfAttribs & (uint)__VSRDTATTRIB.RDTA_DocDataIsDirty) != 0)
+            {
+                _dirtyDocuments.Add(docCookie);
+            }
+            else if ((grfAttribs & (uint)__VSRDTATTRIB.RDTA_DocDataIsNotDirty) != 0)
+            {
+                _dirtyDocuments.Remove(docCookie);
+            }
+
             return VSConstants.S_OK;
         }
 
@@ -128,6 +140,14 @@ namespace KeywordSubstitution.SubstituteRules
             if (!TextViewCreationListener.OpenDocumentsWithWpfTextView.Contains(dataProvider.WpfTextView))
             {
                 Trace.WriteLine("This document's IWpfTextView was not previously registered; might have to investigate this.", GetType().FullName);
+                return VSConstants.S_OK;
+            }
+
+            // If the document is not dirty, the user probably doesn't want to perform substitution in most cases
+            // TODO: Instead, the user can run it manually if desired
+            if (!_dirtyDocuments.Contains(docCookie))
+            {
+                Trace.WriteLine("This document is not dirty; skipped.", GetType().FullName);
                 return VSConstants.S_OK;
             }
 
