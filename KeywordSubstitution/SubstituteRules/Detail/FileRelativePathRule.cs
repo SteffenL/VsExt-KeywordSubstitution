@@ -25,7 +25,7 @@ namespace KeywordSubstitution.SubstituteRules.Detail
             string projectDir = Path.GetDirectoryName(arg.DataProvider.Project.FullName);
             var projectUri = new Uri(projectDir + Path.DirectorySeparatorChar);
             var fileUri = new Uri(arg.DataProvider.DocumentInfo.pbstrMkDocument);
-            var relativeUri = projectUri.MakeRelativeUri(fileUri);
+            var relativeUri = "./" + projectUri.MakeRelativeUri(fileUri);
 
             substituteValue = relativeUri.ToString();
             return true;
