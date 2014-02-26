@@ -15,12 +15,11 @@ using System.Diagnostics;
 using EnvDTE;
 using EnvDTE80;
 using System.IO;
-using KeywordSubstitution.SubstituteRules;
 
-namespace KeywordSubstitution
+namespace KeywordSubstitution.SubstituteRules
 {
-    /// <summary>   My VS RDT event handlers. </summary>
-    internal class MyVsRunningDocTableEvents : IVsRunningDocTableEvents3
+    /// <summary>   VS RDT event sink class for substitute rules. </summary>
+    internal class VsRunningDocTableEventSink : IVsRunningDocTableEvents3
     {
         /// <summary>   VS service provider. </summary>
         private IServiceProvider _services;
@@ -34,7 +33,7 @@ namespace KeywordSubstitution
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [ImportingConstructor]
-        public MyVsRunningDocTableEvents(IServiceProvider services)
+        public VsRunningDocTableEventSink(IServiceProvider services)
         {
             _services = services;
             setupSubstituteRules();
@@ -126,7 +125,7 @@ namespace KeywordSubstitution
 
             // There should have been created a WPF text view for this document.
             // While I'm not sure if this is necessary, I'm staying on the safe side.
-            if (!MyTextViewCreationListener.OpenDocumentsWithWpfTextView.Contains(dataProvider.WpfTextView))
+            if (!TextViewCreationListener.OpenDocumentsWithWpfTextView.Contains(dataProvider.WpfTextView))
             {
                 Trace.WriteLine("This document's IWpfTextView was not previously registered; might have to investigate this.", GetType().FullName);
                 return VSConstants.S_OK;

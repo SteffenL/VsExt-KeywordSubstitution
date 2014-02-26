@@ -13,18 +13,18 @@ using System.Runtime.InteropServices;
 using System.Diagnostics;
 using System.Collections.Generic;
 
-namespace KeywordSubstitution
+namespace KeywordSubstitution.SubstituteRules
 {
     /// <summary>   Listens for text view creation. </summary>
     [Export(typeof(IWpfTextViewCreationListener))]
     [ContentType("text")]
     [TextViewRole(PredefinedTextViewRoles.Document)]
-    internal class MyTextViewCreationListener : IWpfTextViewCreationListener
+    internal class TextViewCreationListener : IWpfTextViewCreationListener
     {
         /// <summary>   VS service provider. </summary>
         private IServiceProvider _services;
         /// <summary>   RDT events. </summary>
-        private MyVsRunningDocTableEvents _myVsRunningDocTableEvents;
+        private VsRunningDocTableEventSink _myVsRunningDocTableEvents;
 
         /// <summary>   Open documents (in VS) that have a WPF text view. </summary>
         public static HashSet<IWpfTextView> OpenDocumentsWithWpfTextView = new HashSet<IWpfTextView>();
@@ -36,10 +36,10 @@ namespace KeywordSubstitution
         ////////////////////////////////////////////////////////////////////////////////////////////////////
 
         [ImportingConstructor]
-        public MyTextViewCreationListener([Import(typeof(SVsServiceProvider))] IServiceProvider services)
+        public TextViewCreationListener([Import(typeof(SVsServiceProvider))] IServiceProvider services)
         {
             _services = services;
-            _myVsRunningDocTableEvents = new MyVsRunningDocTableEvents(_services);
+            _myVsRunningDocTableEvents = new VsRunningDocTableEventSink(_services);
 
             var vsRunningDocumentTable = (IVsRunningDocumentTable)_services.GetService(typeof(SVsRunningDocumentTable));
             uint rdtEventsCookie;
