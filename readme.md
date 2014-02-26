@@ -16,8 +16,45 @@ Please see the code for more details, especially in the files in the folder `Key
 
 The sample below shows all of the available keywords. Some keywords have aliases, such as `IncrementInteger`  and `FileSaveCounter` being aliases for `IncrementNumber`.
 
-Aliases can currently not be customized without editing code and rebuilding the extension. 
+### Available keywords
 
+#### Default keywords
+
+| Keyword           | Description                                                             |
+| ----------------- | ----------------------------------------------------------------------- |
+| ProjectDir        | The project's directory path.                                           |
+| FilePath          | The file's path.                                                        |
+| FileRelativePath  | The file's path relative to the project's directory path.               |
+| FileRelativeDir   | The file's directory path relative to the project's directory path.     |
+| FileName          | the full name of the file.                                              |
+| IncrementNumber   | A simple counter that increments the value.                             |
+| UserName          | The logged-on Windows user's name.                                      |
+| DateTime          | the current date and time with offset, in a universal format.           |
+| MachineName       | The name of the machine (computer name).                                |
+| Guid              | A new GUID.                                                             |
+
+#### Internal aliases
+
+Keywords can have alternative names by default.
+
+| Alias             | Keyword               |
+| ----------------- | --------------------- |
+| IncrementInteger  | IncrementNumber       |
+
+#### Custom aliases (currently hardcoded)
+
+Can currently not be customized without editing code and rebuilding the extension.
+
+| Alias             | Keyword               |
+| ----------------- | --------------------- |
+| FilePathRootHint  | ProjectDir            |
+| FileSaveCounter   | IncrementNumber       |
+| FileSaveUser      | UserName              |
+| FileSaveDateTime  | DateTime              |
+| FileSaveMachine   | MachineName           |
+| FileSaveGuid      | Guid                  |
+
+### Sample (used in your document)
 	$ProjectDir: $
 	$FilePathRootHint: $
 	
