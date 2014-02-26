@@ -16,7 +16,7 @@ Please see the code for more details, especially in the files in the folder `Key
 
 The sample below shows all of the available keywords. Some keywords have aliases, such as `IncrementInteger`  and `FileSaveCounter` being aliases for `IncrementNumber`.
 
-Aliases can currently not be customized. 
+Aliases can currently not be customized without editing code and rebuilding the extension. 
 
 	$ProjectDir: $
 	$FilePathRootHint: $
