@@ -4,9 +4,18 @@
 
 This extension performs keyword substitution/expansion inside a document's text editor when the document is being saved.
 
-## Build prerequisites
+## Building and debugging
+
+### Build prerequisites
+
 - Visual Studio 2010
 - [Visual Studio 2010 SP1 SDK](http://www.microsoft.com/en-us/download/details.aspx?id=21835)
+
+### Debugging
+
+To debug extensions, open the properties of the project (named "KeywordSubstitution"), go to the Debug tab and fill in the following:
+- Start external program: (path to `devenv.exe`, usually `C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe`)
+- Command line arguments: `/rootSuffix Exp`
 
 ## How to use
 
@@ -55,6 +64,7 @@ Can currently not be customized without editing code and rebuilding the extensio
 | FileSaveGuid      | Guid                  |
 
 ### Sample (used in your document)
+
 	$ProjectDir: $
 	$FilePathRootHint: $
 	
