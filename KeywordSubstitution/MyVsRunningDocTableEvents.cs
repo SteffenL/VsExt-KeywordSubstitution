@@ -15,6 +15,7 @@ using System.Diagnostics;
 using EnvDTE;
 using EnvDTE80;
 using System.IO;
+using KeywordSubstitution.SubstituteRules;
 
 namespace KeywordSubstitution
 {

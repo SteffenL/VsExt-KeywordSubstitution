@@ -96,7 +96,7 @@
     <Compile Include="MyTextViewCreationListener.cs" />
     <Compile Include="MyVsRunningDocTableEvents.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SubstituteRuleDataProvider.cs" />
+    <Compile Include="SubstituteRules\SubstituteRuleDataProvider.cs" />
     <Compile Include="SubstituteRules\Detail\GuidRule.cs" />
     <Compile Include="SubstituteRules\Detail\ProjectDirRule.cs" />
     <Compile Include="SubstituteRules\Detail\FileRelativeDirRule.cs" />

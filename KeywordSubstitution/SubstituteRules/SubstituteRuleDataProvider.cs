@@ -13,7 +13,7 @@ using Microsoft.VisualStudio.TextManager.Interop;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace KeywordSubstitution
+namespace KeywordSubstitution.SubstituteRules
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
