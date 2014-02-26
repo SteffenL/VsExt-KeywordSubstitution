@@ -140,7 +140,23 @@ namespace KeywordSubstitution
             }
 
             var textEdit = dataProvider.WpfTextView.TextBuffer.CreateEdit();
-            _substituteRuleManager.ExecuteRules(dataProvider, textEdit);
+
+            try
+            {
+                _substituteRuleManager.ExecuteRules(dataProvider, textEdit);
+            }
+            catch (Exception ex)
+            {
+                // Get the inner-most exception which should have the most useful exception message
+                Exception innerEx = ex;
+                while (innerEx.InnerException != null)
+                {
+                    innerEx = innerEx.InnerException;
+                }
+
+                MessageBox.Show(string.Format("An unhandled exception occurred during substitute rule execution: {0}", innerEx.Message), "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return VSConstants.S_OK;
+            }
 
             // It's probably better to abort the whole edit if
             if (textEdit.HasFailedChanges)
