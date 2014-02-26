@@ -2,7 +2,7 @@
 
 ## About
 
-This extension performs keyword substitution/expansion inside a document's text editor when the document is being saved.
+This extension performs keyword substitution/replacement/expansion inside a document's text editor when the document is being saved.
 
 ## Building and debugging
 
@@ -17,13 +17,15 @@ To debug extensions, open the properties of the project (named "KeywordSubstitut
 - Start external program: (path to `devenv.exe`, usually `C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE\devenv.exe`)
 - Command line arguments: `/rootSuffix Exp`
 
+## Usage requirements
+
+- Visual Studio 2010, 2012 or 2013 (Express editions are not supported)
+
 ## How to use
 
-At the moment, there's not enough documentation because this extension will mainly be used internally.
+Keyword substitution will be done on the open text documents (code or not) that you save. The changes will be done inside a document's text editor before it's saved so that you may see the changes as well as undo them within the editor.
 
-Please see the code for more details, especially in the files in the folder `KeywordSubstitution\SubstituteRules\Detail`.
-
-The sample below shows all of the available keywords. Some keywords have aliases, such as `IncrementInteger`  and `FileSaveCounter` being aliases for `IncrementNumber`.
+**Keyword format:** `$KeywordName: Value$` (please see samples below)
 
 ### Available keywords
 
@@ -63,7 +65,7 @@ Can currently not be customized without editing code and rebuilding the extensio
 | FileSaveMachine   | MachineName           |
 | FileSaveGuid      | Guid                  |
 
-### Sample (used in your document)
+### Examples (used in your document)
 
 	$ProjectDir: $
 	$FilePathRootHint: $
