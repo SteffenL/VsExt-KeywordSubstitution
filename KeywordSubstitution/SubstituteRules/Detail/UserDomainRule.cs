@@ -2,21 +2,22 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.DirectoryServices.ActiveDirectory;
 
 namespace KeywordSubstitution.SubstituteRules.Detail
 {
     ////////////////////////////////////////////////////////////////////////////////////////////////////
     /// <summary>
-    ///     A rule that provides the domain of the person currently logged on Windows. If the user
-    ///     is impersonated, the impersonated domain is used.
+    ///     A rule that provides the username of the person currently logged on Windows. If the user
+    ///     is impersonated, the impersonated username is used.
     /// </summary>
     ////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    public class UserNameRule : SubstituteRule
+    public class UserDomainRule : SubstituteRule
     {
         public override string GetName()
         {
-            return "UserName";
+            return "UserDomain";
         }
 
         public override void Register(SubstituteRuleManager manager)
@@ -26,7 +27,15 @@ namespace KeywordSubstitution.SubstituteRules.Detail
 
         public override bool Execute(out string substituteValue, SubstituteRule.ExecuteArg arg)
         {
-            substituteValue = Environment.UserName;
+            string domain = null;
+            try
+            {
+                var cd = Domain.GetCurrentDomain();
+                domain = cd.ToString();
+            }
+            catch (ActiveDirectoryOperationException) { }
+
+            substituteValue = domain;
             return true;
         }
     }

@@ -208,6 +208,7 @@ namespace KeywordSubstitution.SubstituteRules
             _substituteRuleManager.RegisterRuleNameAlias("IncrementNumber", "FileSaveCounter");
             _substituteRuleManager.RegisterRuleNameAlias("DateTime", "FileSaveDateTime");
             _substituteRuleManager.RegisterRuleNameAlias("UserName", "FileSaveUser");
+            _substituteRuleManager.RegisterRuleNameAlias("UserDomain", "FileSaveUserDomain");
             _substituteRuleManager.RegisterRuleNameAlias("MachineName", "FileSaveMachine");
             _substituteRuleManager.RegisterRuleNameAlias("ProjectDir", "FilePathRootHint");
             _substituteRuleManager.RegisterRuleNameAlias("Guid", "FileSaveGuid");

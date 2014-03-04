@@ -88,11 +88,13 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data" />
+    <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xaml" />
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SubstituteRules\Detail\UserDomainRule.cs" />
     <Compile Include="SubstituteRules\TextViewCreationListener.cs" />
     <Compile Include="SubstituteRules\VsRunningDocTableEventSink.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
