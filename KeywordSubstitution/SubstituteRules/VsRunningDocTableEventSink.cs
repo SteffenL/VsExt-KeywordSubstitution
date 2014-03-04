@@ -145,11 +145,13 @@ namespace KeywordSubstitution.SubstituteRules
 
             // If the document is not dirty, the user probably doesn't want to perform substitution in most cases
             // TODO: Instead, the user can run it manually if desired
-            if (!_dirtyDocuments.Contains(docCookie))
+            // TODO: This needs to be fixed. The OnAfterAttributeChangeEx event is fired with a day of 1-2 seconds. It could take that long before the document's dirty state is notified.
+            // Therefore, this code is not reliable in its current state.
+            /*if (!_dirtyDocuments.Contains(docCookie))
             {
                 Trace.WriteLine("This document is not dirty; skipped.", GetType().FullName);
                 return VSConstants.S_OK;
-            }
+            }*/
 
             dataProvider.Project = VsHelper.GetProject(dataProvider.DocumentInfo.ppHier);
             if (dataProvider.Project == null)
