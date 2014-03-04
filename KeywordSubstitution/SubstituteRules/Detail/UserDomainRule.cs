@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.DirectoryServices.ActiveDirectory;
 
 namespace KeywordSubstitution.SubstituteRules.Detail
 {
@@ -27,15 +26,10 @@ namespace KeywordSubstitution.SubstituteRules.Detail
 
         public override bool Execute(out string substituteValue, SubstituteRule.ExecuteArg arg)
         {
-            string domain = null;
-            try
-            {
-                var cd = Domain.GetCurrentDomain();
-                domain = cd.ToString();
-            }
-            catch (ActiveDirectoryOperationException) { }
-
-            substituteValue = domain;
+            // NOTE: In a somewhat large network with a PDC, and the computer is not a member of a domain, GetCurrentDomain() may hang for seconds to minutes
+            // As a workaround, I've attempted to check if the computer is a member of a domain before calling GetCurrentDomain()
+            // TODO: Check if this is correct and reliable
+            substituteValue = WindowsDomain.GetDomainName();
             return true;
         }
     }

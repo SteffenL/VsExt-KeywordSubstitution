@@ -113,6 +113,7 @@
     <Compile Include="SubstituteRules\SubstituteRuleManager.cs" />
     <Compile Include="VsHelper.cs" />
     <Compile Include="VsDocumentInfo.cs" />
+    <Compile Include="WindowsDomain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="source.extension.vsixmanifest">
